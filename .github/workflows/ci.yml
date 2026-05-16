@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
+
+      - name: Run lint
+        run: corepack pnpm exec nx lint --all
+
+      - name: Run tests
+        run: corepack pnpm exec nx test --all --skip-nx-cache
+
+      - name: Run typecheck
+        run: corepack pnpm exec tsc -p tsconfig.base.json --noEmit

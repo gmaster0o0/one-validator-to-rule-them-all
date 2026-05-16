@@ -1,3 +1,6 @@
 {
-  "{apps,libs}/**/*.{ts,js,html,scss}": ["eslint --fix", "prettier --write"]
+  "{frontend,backend,shared}/**/*.{ts,js,html,scss}": [
+    "eslint --fix",
+    "prettier --write"
+  ]
 }

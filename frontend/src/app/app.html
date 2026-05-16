@@ -5,15 +5,11 @@
     <div hlmCardHeader>
       <h3 hlmCardTitle>Login to your account</h3>
       <p hlmCardDescription>Enter your email below to login to your account</p>
-
-      <div hlmCardAction>
-        <button hlmBtn variant="link">Sign Up</button>
-      </div>
     </div>
 
     <div hlmCardContent>
       <form>
-        <div class="flex flex-col gap-6">
+        <div hlm-field class="flex flex-col gap-6">
           <div class="grid gap-2">
             <label hlmLabel for="email">Email</label>
             <input
@@ -24,16 +20,13 @@
               hlmInput
             />
           </div>
+          <hlm-field-error validator="required"
+            >Title is a required field.</hlm-field-error
+          >
 
           <div class="grid gap-2">
             <div class="flex items-center">
               <label hlmLabel for="password">Password</label>
-              <a
-                href="#"
-                class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-              >
-                Forgot your password?
-              </a>
             </div>
             <input type="password" id="password" hlmInput />
           </div>
