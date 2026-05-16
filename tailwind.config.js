@@ -2,8 +2,8 @@ module.exports = {
   darkMode: 'class',
   presets: [require('@spartan-ng/brain/hlm-tailwind-preset')],
   content: [
-    './apps/**/*.{html,ts,scss}',
-    './libs/**/*.{html,ts,scss}',
+    './frontend/src/**/*.{html,ts,scss}',
+    './shared/**/*.{html,ts,scss}',
   ],
   theme: {
     extend: {},

@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
+import { provideIcons } from '@ng-icons/core';
+import { lucideCheck, lucideChevronDown } from '@ng-icons/lucide';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmCardImports } from '@spartan-ng/helm/card';
+import { HlmInputImports } from '@spartan-ng/helm/input';
+import { HlmLabelImports } from '@spartan-ng/helm/label';
 
 @Component({
-  imports: [NxWelcome, RouterModule],
   selector: 'app-root',
+  standalone: true,
+  imports: [HlmCardImports, HlmLabelImports, HlmInputImports, HlmButtonImports],
+  providers: [provideIcons({ lucideCheck, lucideChevronDown })],
+  host: {
+    class: 'contents',
+  },
   templateUrl: './app.html',
 })
-export class App {
-  protected title = 'frontend';
-}
+export class App {}

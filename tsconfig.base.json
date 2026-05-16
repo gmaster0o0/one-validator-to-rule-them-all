@@ -10,7 +10,10 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "paths": {
@@ -29,8 +32,40 @@
       "@one-validator-to-rule-them-all/testing": [
         "./shared/testing/src/index.ts"
       ],
-      "@one-validator/ui-helm": ["./shared/ui-helm/src/index.ts"]
+      "@one-validator/ui-helm": [
+        "./shared/ui-helm/src/index.ts"
+      ],
+      "@spartan-ng/helm/button": [
+        "./shared/spartan-ng/button/src/index.ts"
+      ],
+      "@spartan-ng/helm/field": [
+        "./shared/spartan-ng/field/src/index.ts"
+      ],
+      "@spartan-ng/helm/icon": [
+        "./shared/spartan-ng/icon/src/index.ts"
+      ],
+      "@spartan-ng/helm/input": [
+        "./shared/spartan-ng/input/src/index.ts"
+      ],
+      "@spartan-ng/helm/label": [
+        "./shared/spartan-ng/label/src/index.ts"
+      ],
+      "@spartan-ng/helm/sonner": [
+        "./shared/spartan-ng/sonner/src/index.ts"
+      ],
+      "@spartan-ng/helm/utils": [
+        "./shared/spartan-ng/utils/src/index.ts"
+      ],
+      "@spartan-ng/helm/separator": [
+        "./shared/spartan-ng/separator/src/index.ts"
+      ],
+      "@spartan-ng/helm/card": [
+        "./shared/spartan-ng/card/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
