@@ -44,7 +44,7 @@ The repository is organized into apps and shared libraries under a monorepo stru
 - **backend**: Login flow, Zod decorators, Zod pipes — DONE
 - **frontend**: Signal form with Zod schema validation — In Progress
 - **shared/schemas**: DONE
-- **shared/testing**: In Progress
+- **shared/testing**: In Progress, adding content as needed for tests
 - **shared/validation**: `ErrorTransformer` — Not Implemented Yet
 - **spartan-ng**: DONE
 

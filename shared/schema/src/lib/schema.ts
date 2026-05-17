@@ -1,5 +1,8 @@
 import { z } from 'zod';
-
+/**
+ * Hide the password field in the BaseUserDto, which is used for responses.
+ * The UserDto includes the password and is used for requests.
+ */
 export const BaseUserSchema = z.object({
   id: z.string().min(5),
   email: z.email(),

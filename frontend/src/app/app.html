@@ -1,5 +1,5 @@
 <div
-  class="preview flex min-h-[350px] w-full justify-center px-4 lg:px-10 py-10 items-center style-vega"
+  class="preview flex min-h-[350px] flex-col w-full justify-center px-4 lg:px-10 py-10 items-center style-vega"
 >
   <section class="w-full max-w-sm" hlmCard>
     <div hlmCardHeader>
@@ -8,34 +8,48 @@
     </div>
 
     <div hlmCardContent>
-      <form>
+      <form [formRoot]="loginForm" id="loginFormId">
         <div hlm-field class="flex flex-col gap-6">
           <div class="grid gap-2">
             <label hlmLabel for="email">Email</label>
             <input
               type="email"
               id="email"
-              placeholder="m@example.com"
-              required
+              placeholder="Admin@example.com"
+              [formField]="loginForm.email"
               hlmInput
             />
           </div>
-          <hlm-field-error validator="required"
-            >Title is a required field.</hlm-field-error
-          >
-
           <div class="grid gap-2">
             <div class="flex items-center">
               <label hlmLabel for="password">Password</label>
             </div>
-            <input type="password" id="password" hlmInput />
+            <input
+              [formField]="loginForm.password"
+              type="password"
+              id="password"
+              hlmInput
+            />
           </div>
         </div>
       </form>
     </div>
 
     <div hlmCardFooter class="flex-col gap-2">
-      <button hlmBtn type="submit" class="w-full">Login</button>
+      <button
+        hlmBtn
+        type="submit"
+        form="loginFormId"
+        [disabled]="loginForm().pending() || loginForm().invalid()"
+        class="w-full"
+      >
+        {{ loginForm().pending() ? 'Login...' : 'Login' }}
+      </button>
     </div>
   </section>
+  <app-debug-panel
+    class="w-full max-w-sm"
+    [data]="loginData()"
+    [form]="loginForm()"
+  ></app-debug-panel>
 </div>

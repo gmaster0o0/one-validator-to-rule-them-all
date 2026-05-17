@@ -1,0 +1,43 @@
+<section hlmCard class="mt-8 border-dashed border-2">
+  <div hlmCardHeader>
+    <h3 hlmCardTitle class="text-sm font-mono text-orange-500 uppercase">
+      🔍 Signal Form Debugger
+    </h3>
+  </div>
+
+  <div hlmCardContent class="grid gap-4 font-mono text-[10px]">
+    <!-- 1. RAW DATA (A modell signal értéke - ez biztonságos) -->
+    <div>
+      <p class="text-muted-foreground mb-1">// RAW MODEL DATA</p>
+      <pre class="bg-secondary p-3 rounded-md border">{{ data() | json }}</pre>
+    </div>
+
+    <!-- 2. FORM STATES (Csak a booleant visszaadó jelek) -->
+    <div class="grid grid-cols-2 gap-2 pt-2 border-t text-[11px]">
+      <div
+        [class.text-green-500]="form().valid()"
+        [class.text-red-500]="form().invalid()"
+      >
+        VALID: {{ form().valid() }}
+      </div>
+      <div [class.text-yellow-500]="form().pending()">
+        PENDING: {{ form().pending() }}
+      </div>
+      <div>DIRTY: {{ form().dirty() }}</div>
+      <div>TOUCHED: {{ form().touched() }}</div>
+    </div>
+
+    <!-- 3. ERRORS (A hiba tömb - ez is biztonságosan megjeleníthető) -->
+    @if (form().errors().length > 0) {
+    <div class="mt-2">
+      <p class="text-red-500 mb-1">// VALIDATION ERRORS</p>
+      <pre
+        class="bg-red-950/20 p-2 rounded border border-red-900/50 text-red-400"
+      >
+          {{ form().errors() | json }}
+        </pre
+      >
+    </div>
+    }
+  </div>
+</section>
