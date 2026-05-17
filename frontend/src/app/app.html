@@ -51,6 +51,9 @@
               [formField]="loginForm.email"
               hlmInput
             />
+            @if (loginForm.email().errors() | zodTransform1:'login'; as token) {
+            <hlm-field-error> {{ token.key }} </hlm-field-error>
+            }
           </div>
           <div class="grid gap-2">
             <div class="flex items-center">
@@ -62,6 +65,10 @@
               id="password"
               hlmInput
             />
+            @if (loginForm.password().errors() | zodTransformAll:'login'; as
+            tokens) { @for (token of tokens; track $index) {
+            <hlm-field-error> {{ token.key }} </hlm-field-error>
+            } }
           </div>
         </div>
       </form>
@@ -77,6 +84,15 @@
       >
         {{ loginStatus.status() === 'loading' ? 'Login...' : 'Login' }}
       </button>
+      @if (loginStatus.status() === 'error') {
+      <hlm-alert variant="destructive" class="max-w-md">
+        <ng-icon name="lucideAlertCircle" />
+        <h4 hlmAlertTitle>Authentication failed</h4>
+        <p hlmAlertDescription>
+          {{ backendResponse()?.message || 'Authentication failed.' }}
+        </p>
+      </hlm-alert>
+      }
     </div>
   </section>
   <app-debug-panel

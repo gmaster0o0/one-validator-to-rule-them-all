@@ -18,6 +18,12 @@
         }
       }
     },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec tsc -p backend/tsconfig.app.json --noEmit"
+      }
+    },
     "prune-lockfile": {
       "dependsOn": ["build"],
       "cache": true,

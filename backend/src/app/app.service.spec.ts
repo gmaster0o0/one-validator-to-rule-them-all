@@ -18,12 +18,14 @@ describe('AppService', () => {
   });
 
   describe('login', () => {
-    it('should return user data for valid credentials', () => {
-      expect(service.login(validLoginCredentials)).toEqual(validUserResponse);
+    it('should return user data for valid credentials', async () => {
+      await expect(service.login(validLoginCredentials)).resolves.toEqual(
+        validUserResponse,
+      );
     });
 
-    it('should throw unauthorized for invalid credentials', () => {
-      expect(() => service.login(invalidLoginCredentials)).toThrow(
+    it('should throw unauthorized for invalid credentials', async () => {
+      await expect(service.login(invalidLoginCredentials)).rejects.toThrow(
         'Invalid credentials',
       );
     });

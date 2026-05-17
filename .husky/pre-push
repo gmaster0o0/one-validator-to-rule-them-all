@@ -1,3 +1,3 @@
 #!/bin/sh
-pnpm exec tsc -p tsconfig.base.json --noEmit
-pnpm exec nx test --all --skip-nx-cache
+pnpm typecheck
+pnpm test

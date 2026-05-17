@@ -1,12 +1,18 @@
 import { provideIcons } from '@ng-icons/core';
-import { lucideCheck, lucideMailX, lucideX } from '@ng-icons/lucide';
+import {
+  lucideCheck,
+  lucideMailX,
+  lucideX,
+  lucideAlertCircle,
+} from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
+import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import {
   form,
   FormRoot,
@@ -21,6 +27,10 @@ import {
 } from '@one-validator-to-rule-them-all/testing';
 import { DebugPanelComponent } from './debug/debug-panel';
 import { AppService } from './app.service';
+import {
+  ZodTransformPipeAll,
+  ZodTransformPipFirst,
+} from '@one-validator-to-rule-them-all/validation';
 
 @Component({
   selector: 'app-root',
@@ -31,12 +41,17 @@ import { AppService } from './app.service';
     HlmInputImports,
     HlmButtonImports,
     HlmFieldImports,
+    ZodTransformPipFirst,
+    ZodTransformPipeAll,
     FormField,
     FormRoot,
     DebugPanelComponent,
     HlmIconImports,
+    HlmAlertImports,
   ],
-  providers: [provideIcons({ lucideCheck, lucideX, lucideMailX })],
+  providers: [
+    provideIcons({ lucideCheck, lucideX, lucideMailX, lucideAlertCircle }),
+  ],
   host: {
     class: 'contents',
   },
@@ -58,19 +73,31 @@ export class AppComponent {
   loginData = signal({ email: '', password: '' });
   backendData = signal<any>(null);
 
+  constructor() {
+    effect(() => {
+      this.loginData();
+
+      // Whenever loginData changes, we reset the backend response to clear previous results
+      //this clears the backend alert
+      this.appService.reset();
+    });
+  }
   /**
    * Helper methods to fill the form with different test credentials for quick testing of various scenarios.
    */
   fillValidCredentials() {
     this.loginData.set(validLoginCredentials);
+    this.loginForm().markAsDirty();
   }
 
   fillInvalidCredentials() {
     this.loginData.set(invalidLoginCredentials);
+    this.loginForm().markAsDirty();
   }
 
   fillInvalidEmail() {
     this.loginData.set(invalidLoginCredentialsBadEmail);
+    this.loginForm().markAsDirty();
   }
 
   /**
@@ -79,7 +106,9 @@ export class AppComponent {
    */
   loginForm = form(
     this.loginData,
-    (path) => validateStandardSchema(path, LoginCredentialsSchema),
+    (path) => {
+      validateStandardSchema(path, LoginCredentialsSchema);
+    },
     {
       submission: {
         action: async (data) => {

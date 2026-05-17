@@ -14,6 +14,12 @@
         "tsConfig": "shared/schema/tsconfig.lib.json",
         "assets": ["shared/schema/*.md"]
       }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec tsc -p shared/schema/tsconfig.lib.json --noEmit"
+      }
     }
   }
 }

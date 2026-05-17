@@ -17,9 +17,9 @@ describe('AppController', () => {
   });
 
   describe('login', () => {
-    it('should return user data for valid credentials', () => {
+    it('should return user data for valid credentials', async () => {
       const appController = app.get<AppController>(AppController);
-      expect(appController.login(validLoginCredentials)).toEqual(
+      expect(await appController.login(validLoginCredentials)).toEqual(
         validUserResponse,
       );
     });

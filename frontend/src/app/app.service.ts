@@ -37,9 +37,9 @@ export class AppService {
   }
 
   /**
-   * Logout and reset the login state
+   * Reset the login state
    */
-  logout(): void {
+  reset(): void {
     this.loginTrigger.set(null);
   }
 }
