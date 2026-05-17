@@ -1,6 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import {
+  validLoginCredentials,
+  validUserResponse,
+} from '@one-validator-to-rule-them-all/testing';
 
 describe('AppController', () => {
   let app: TestingModule;
@@ -12,10 +16,12 @@ describe('AppController', () => {
     }).compile();
   });
 
-  describe('getData', () => {
-    it('should return "Hello API"', () => {
+  describe('login', () => {
+    it('should return user data for valid credentials', () => {
       const appController = app.get<AppController>(AppController);
-      expect(appController.getData()).toEqual({ message: 'Hello API' });
+      expect(appController.login(validLoginCredentials)).toEqual(
+        validUserResponse,
+      );
     });
   });
 });

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import {
   BaseUserDto,
   LoginCredentialsDto,
@@ -16,7 +16,7 @@ export class AppService {
       loginBody.email !== testUser.email ||
       loginBody.password !== testUser.password
     ) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     return { id: testUser.id, email: testUser.email };
