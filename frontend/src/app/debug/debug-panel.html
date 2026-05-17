@@ -6,13 +6,13 @@
   </div>
 
   <div hlmCardContent class="grid gap-4 font-mono text-[10px]">
-    <!-- 1. RAW DATA (A modell signal értéke - ez biztonságos) -->
+    <!-- 1. RAW DATA (The raw model data - this is safe) -->
     <div>
       <p class="text-muted-foreground mb-1">// RAW MODEL DATA</p>
       <pre class="bg-secondary p-3 rounded-md border">{{ data() | json }}</pre>
     </div>
 
-    <!-- 2. FORM STATES (Csak a booleant visszaadó jelek) -->
+    <!-- 2. FORM STATES (Only the boolean signals) -->
     <div class="grid grid-cols-2 gap-2 pt-2 border-t text-[11px]">
       <div
         [class.text-green-500]="form().valid()"
@@ -26,18 +26,43 @@
       <div>DIRTY: {{ form().dirty() }}</div>
       <div>TOUCHED: {{ form().touched() }}</div>
     </div>
+    <!-- 3. BACKEND RESPONSE (The response from the server after submission) -->
+    <div class="pt-2 border-t">
+      <div class="flex items-center gap-2 mb-1">
+        <p class="text-muted-foreground uppercase tracking-wider">
+          // BACKEND RESPONSE
+        </p>
+        @if (backendStatus() === 'resolved') {
+        <ng-icon hlm name="lucideCheck" size="sm" class="text-emerald-500" />
+        } @if (backendStatus() === 'error') {
+        <ng-icon hlm name="lucideX" size="sm" class="text-red-500" />
+        } @if (backendStatus() === 'loading') {
+        <ng-icon hlm name="lucideHourglass" size="sm" class="text-yellow-500" />
+        }
+      </div>
+      @if (backendResponse()) {
+      <pre
+        class="bg-secondary p-3 rounded-md border text-[11px] font-mono overflow-auto max-h-48 w-full whitespace-pre-wrap break-all"
+      >
+        {{ backendResponse() | json }}
+      </pre>
+      } @else {
+      <p class="text-zinc-500 italic text-[9px]">Waiting for response...</p>
+      }
+    </div>
+    <!-- 4. ERRORS (Any validation errors from the form) -->
 
-    <!-- 3. ERRORS (A hiba tömb - ez is biztonságosan megjeleníthető) -->
-    @if (form().errors().length > 0) {
     <div class="mt-2">
       <p class="text-red-500 mb-1">// VALIDATION ERRORS</p>
+      @if (form().errorSummary().length > 0 && form().touched()) {
       <pre
-        class="bg-red-950/20 p-2 rounded border border-red-900/50 text-red-400"
+        class="bg-red-950/10 border border-red-500/20 text-orange-800 p-3 rounded-md text-[11px] font-mono overflow-auto max-h-48 w-full whitespace-pre-wrap break-all"
       >
-          {{ form().errors() | json }}
-        </pre
-      >
+          {{ form().errorSummary() | json }}
+      </pre>
+      } @if (form().errorSummary().length === 0 && form().touched()) {
+      <p class="text-green-500 italic text-[9px]">No validation errors 🎉</p>
+      }
     </div>
-    }
   </div>
 </section>

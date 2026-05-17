@@ -4,9 +4,14 @@ import {
   LoginCredentialsDto,
 } from '@one-validator-to-rule-them-all/shared/schema';
 
+// Basic delay function to simulate network latency
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 @Injectable()
 export class AppService {
-  login(loginBody: LoginCredentialsDto): BaseUserDto {
+  async login(loginBody: LoginCredentialsDto): Promise<BaseUserDto> {
+    await delay(500);
+
     const testUser = {
       id: 'user_123',
       password: 'test123',

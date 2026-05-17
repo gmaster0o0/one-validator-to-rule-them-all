@@ -8,6 +8,11 @@ export const invalidLoginCredentials = {
   password: 'badpass',
 };
 
+export const invalidLoginCredentialsBadEmail = {
+  email: 'invalid-email',
+  password: 'test123',
+};
+
 export const invalidLoginCredentialsMissingEmail = {
   password: 'test123',
 };

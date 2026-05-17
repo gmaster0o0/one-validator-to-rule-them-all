@@ -12,9 +12,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('login')
-  login(
+  async login(
     @ZodBody(LoginCredentialsSchema) loginDto: LoginCredentialsDto,
-  ): BaseUserDto {
+  ): Promise<BaseUserDto> {
     return this.appService.login(loginDto);
   }
 }

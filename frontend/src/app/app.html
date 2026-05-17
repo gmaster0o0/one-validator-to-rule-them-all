@@ -4,7 +4,39 @@
   <section class="w-full max-w-sm" hlmCard>
     <div hlmCardHeader>
       <h3 hlmCardTitle>Login to your account</h3>
-      <p hlmCardDescription>Enter your email below to login to your account</p>
+      <p hlmCardDescription class="text-xs text-muted-foreground">Autofill:</p>
+      <div class="flex flex-wrap gap-2 items-center">
+        <button
+          type="button"
+          hlmBtn
+          variant="outline"
+          class="text-[10px] px-1 py-1"
+          (click)="fillValidCredentials()"
+        >
+          <ng-icon hlm name="lucideCheck" size="sm" />
+          Valid credential
+        </button>
+        <button
+          type="button"
+          hlmBtn
+          variant="outline"
+          class="text-[10px] px-1 py-1"
+          (click)="fillInvalidCredentials()"
+        >
+          <ng-icon hlm name="lucideX" size="sm" />
+          Invalid credential
+        </button>
+        <button
+          type="button"
+          hlmBtn
+          variant="outline"
+          class="text-[10px] px-1 py-1"
+          (click)="fillInvalidEmail()"
+        >
+          <ng-icon hlm name="lucideMailX" size="sm" />
+          Invalid email
+        </button>
+      </div>
     </div>
 
     <div hlmCardContent>
@@ -43,7 +75,7 @@
         [disabled]="loginForm().pending() || loginForm().invalid()"
         class="w-full"
       >
-        {{ loginForm().pending() ? 'Login...' : 'Login' }}
+        {{ loginStatus.status() === 'loading' ? 'Login...' : 'Login' }}
       </button>
     </div>
   </section>
@@ -51,5 +83,7 @@
     class="w-full max-w-sm"
     [data]="loginData()"
     [form]="loginForm()"
+    [backendResponse]="backendResponse()"
+    [backendStatus]="loginStatus.status()"
   ></app-debug-panel>
 </div>
