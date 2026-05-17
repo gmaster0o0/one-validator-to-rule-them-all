@@ -26,6 +26,9 @@
       "@one-validator-to-rule-them-all/schema": [
         "./shared/schema/src/index.ts"
       ],
+      "@one-validator-to-rule-them-all/shared/schema": [
+        "./shared/schema/src/index.ts"
+      ],
       "@one-validator-to-rule-them-all/validation": [
         "./shared/validation/src/index.ts"
       ],
