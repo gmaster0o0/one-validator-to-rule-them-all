@@ -1,0 +1,24 @@
+<div class="flex items-center">
+  <ng-icon name="lucideGlobe" class="text-lg block" />
+  <hlm-select
+    [value]="currentLangValue()"
+    (valueChange)="handleLangChange($event)"
+    class="flex items-center"
+  >
+    <hlm-select-label class="mb-2"
+      >{{ 'language.label' | transloco }}</hlm-select-label
+    >
+    <hlm-select-trigger class="w-30">
+      <hlm-select-value placeholder="{{ 'language.select' | transloco }}" />
+    </hlm-select-trigger>
+    <hlm-select-content *hlmSelectPortal>
+      <hlm-select-group>
+        @for (language of languageOptions; track language.value) {
+        <hlm-select-item [value]="language"
+          >{{ language.label }}</hlm-select-item
+        >
+        }
+      </hlm-select-group>
+    </hlm-select-content>
+  </hlm-select>
+</div>

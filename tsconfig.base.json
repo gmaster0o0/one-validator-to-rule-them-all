@@ -67,6 +67,9 @@
       ],
       "@spartan-ng/helm/alert": [
         "./shared/spartan-ng/alert/src/index.ts"
+      ],
+      "@spartan-ng/helm/select": [
+        "./shared/spartan-ng/select/src/index.ts"
       ]
     }
   },

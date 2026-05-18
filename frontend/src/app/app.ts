@@ -31,11 +31,14 @@ import {
   ZodTransformPipeAll,
   ZodTransformPipFirst,
 } from '@one-validator-to-rule-them-all/validation';
+import { LanguageSelector } from './languange/language-selector';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    LanguageSelector,
     HlmCardImports,
     HlmLabelImports,
     HlmInputImports,
@@ -48,6 +51,7 @@ import {
     DebugPanelComponent,
     HlmIconImports,
     HlmAlertImports,
+    TranslocoModule,
   ],
   providers: [
     provideIcons({ lucideCheck, lucideX, lucideMailX, lucideAlertCircle }),
