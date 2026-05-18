@@ -1,4 +1,17 @@
 {
-  "language.label": "Missing value for 'language.label'",
-  "language.select": "Missing value for 'language.select'"
+  "login.title": "Jelentkezzen be a fiókjába",
+  "login.autofill": "Automatikus kitöltés",
+  "login.autofill.validCredential": "Érvényes hitelesítő adatok",
+  "login.autofill.invalidCredential": "Érvénytelen hitelesítő adatok",
+  "login.autofill.invalidEmail": "Érvénytelen e-mail cím",
+  "login.label.email": "E-mail",
+  "login.label.password": "Jelszó",
+  "login.error.title": "Hitelesítés sikertelen",
+  "login.error.message": "A hitelesítés sikertelen.",
+  "language.select": "Válasszon nyelvet",
+  "backend.response": "BACKEND VÁLASZ",
+  "backend.waiting": "Válaszra vár...",
+  "form.errors": "ÉRVÉNYESÍTÉSI HIBÁK",
+  "form.noErrors": "Nincs érvényesítési hiba 🎉",
+  "language.label": "Nyelv"
 }

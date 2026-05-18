@@ -1,4 +1,17 @@
 {
-  "language.label": "Missing value for 'language.label'",
-  "language.select": "Missing value for 'language.select'"
+  "login.title": "Inicia sesión en tu cuenta",
+  "login.autofill": "Autocompletar",
+  "login.autofill.validCredential": "Credenciales válidas",
+  "login.autofill.invalidCredential": "Credenciales inválidas",
+  "login.autofill.invalidEmail": "Correo electrónico inválido",
+  "login.label.email": "Correo electrónico",
+  "login.label.password": "Contraseña",
+  "login.error.title": "Error de autenticación",
+  "login.error.message": "La autenticación ha fallado.",
+  "language.select": "Selecciona idioma",
+  "backend.response": "RESPUESTA DEL BACKEND",
+  "backend.waiting": "Esperando respuesta...",
+  "form.errors": "ERRORES DE VALIDACIÓN",
+  "form.noErrors": "No hay errores de validación 🎉",
+  "language.label": "Idioma"
 }

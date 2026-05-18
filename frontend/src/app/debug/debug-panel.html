@@ -30,7 +30,7 @@
     <div class="pt-2 border-t">
       <div class="flex items-center gap-2 mb-1">
         <p class="text-muted-foreground uppercase tracking-wider">
-          // BACKEND RESPONSE
+          // {{ 'backend.response' | transloco }}
         </p>
         @if (backendStatus() === 'resolved') {
         <ng-icon hlm name="lucideCheck" size="sm" class="text-emerald-500" />
@@ -47,13 +47,15 @@
         {{ backendResponse() | json }}
       </pre>
       } @else {
-      <p class="text-zinc-500 italic text-[9px]">Waiting for response...</p>
+      <p class="text-zinc-500 italic text-[9px]">
+        {{ 'backend.waiting' | transloco }}
+      </p>
       }
     </div>
     <!-- 4. ERRORS (Any validation errors from the form) -->
 
     <div class="mt-2">
-      <p class="text-red-500 mb-1">// VALIDATION ERRORS</p>
+      <p class="text-red-500 mb-1">// {{ 'form.errors' | transloco }}</p>
       @if (form().errorSummary().length > 0 && (form().touched() ||
       form().dirty())) {
       <pre
@@ -63,7 +65,9 @@
       </pre>
       } @if (form().errorSummary().length === 0 && (form().touched() ||
       form().dirty())) {
-      <p class="text-green-500 italic text-[9px]">No validation errors 🎉</p>
+      <p class="text-green-500 italic text-[9px]">
+        {{ 'form.noErrors' | transloco }}
+      </p>
       }
     </div>
   </div>

@@ -1,4 +1,17 @@
 {
-  "language.label": "Missing value for 'language.label'",
-  "language.select": "Missing value for 'language.select'"
+  "login.title": "Login to your account",
+  "login.autofill": "Autofill",
+  "login.autofill.validCredential": "Valid credentials",
+  "login.autofill.invalidCredential": "Invalid credentials",
+  "login.autofill.invalidEmail": "Invalid email",
+  "login.label.email": "Email",
+  "login.label.password": "Password",
+  "login.error.title": "Authentication failed",
+  "login.error.message": "Authentication failed.",
+  "language.select": "Select language",
+  "backend.response": "BACKEND RESPONSE",
+  "backend.waiting": "Waiting for response...",
+  "form.errors": "VALIDATION ERRORS",
+  "form.noErrors": "No validation errors 🎉",
+  "language.label": "Language"
 }

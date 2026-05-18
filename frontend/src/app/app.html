@@ -19,7 +19,7 @@
           (click)="fillValidCredentials()"
         >
           <ng-icon hlm name="lucideCheck" size="sm" />
-          {{ 'login.validCredential' | transloco }}
+          {{ 'login.autofill.validCredential' | transloco }}
         </button>
         <button
           type="button"
@@ -29,7 +29,7 @@
           (click)="fillInvalidCredentials()"
         >
           <ng-icon hlm name="lucideX" size="sm" />
-          {{ 'login.invalidCredential' | transloco }}
+          {{ 'login.autofill.invalidCredential' | transloco }}
         </button>
         <button
           type="button"
@@ -39,7 +39,7 @@
           (click)="fillInvalidEmail()"
         >
           <ng-icon hlm name="lucideMailX" size="sm" />
-          Invalid email
+          {{ 'login.autofill.invalidEmail' | transloco }}
         </button>
       </div>
     </div>
@@ -48,7 +48,9 @@
       <form [formRoot]="loginForm" id="loginFormId">
         <div hlm-field class="flex flex-col gap-6">
           <div class="grid gap-2">
-            <label hlmLabel for="email">Email</label>
+            <label hlmLabel for="email"
+              >{{ 'login.label.email' | transloco }}</label
+            >
             <input
               type="email"
               id="email"
@@ -63,7 +65,7 @@
           <div class="grid gap-2">
             <div class="flex items-center">
               <label hlmLabel for="password"
-                >{{ 'login.password' | transloco }}</label
+                >{{ 'login.label.password' | transloco }}</label
               >
             </div>
             <input
@@ -94,9 +96,10 @@
       @if (loginStatus.status() === 'error') {
       <hlm-alert variant="destructive" class="max-w-md">
         <ng-icon name="lucideAlertCircle" />
-        <h4 hlmAlertTitle>Authentication failed</h4>
+        <h4 hlmAlertTitle>{{ 'login.error.title' | transloco }}</h4>
         <p hlmAlertDescription>
-          {{ backendResponse()?.message || 'Authentication failed.' }}
+          {{ backendResponse()?.message || ('login.error.message' | transloco)
+          }}
         </p>
       </hlm-alert>
       }
