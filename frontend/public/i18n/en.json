@@ -6,7 +6,6 @@
   "login.autofill.invalidEmail": "Invalid email",
   "login.label.email": "Email",
   "login.label.password": "Password",
-  "login.email.invalid_format": "Email must be a valid email address",
   "login.password.too_small": "Password must be at least {{minimum}} characters long",
   "login.password.need_number": "Password must contain at least one number",
   "login.password.need_letter": "Password must contain at least one letter",
@@ -17,5 +16,6 @@
   "backend.waiting": "Waiting for response...",
   "form.errors": "VALIDATION ERRORS",
   "form.noErrors": "No validation errors 🎉",
+  "login.email.invalid_format": "Email must be a valid email address",
   "language.label": "Language"
 }

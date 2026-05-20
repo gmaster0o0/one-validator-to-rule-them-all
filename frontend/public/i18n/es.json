@@ -6,7 +6,6 @@
   "login.autofill.invalidEmail": "Correo electrónico inválido",
   "login.label.email": "Correo electrónico",
   "login.label.password": "Contraseña",
-  "login.email.invalid_format": "El correo electrónico debe ser una dirección de correo electrónico válida",
   "login.password.too_small": "La contraseña debe tener al menos {{minimum}} caracteres",
   "login.password.need_number": "La contraseña debe contener al menos un número",
   "login.password.need_letter": "La contraseña debe contener al menos una letra",
@@ -17,5 +16,6 @@
   "backend.waiting": "Esperando respuesta...",
   "form.errors": "ERRORES DE VALIDACIÓN",
   "form.noErrors": "No hay errores de validación 🎉",
+  "login.email.invalid_format": "El correo electrónico debe ser una dirección de correo electrónico válida",
   "language.label": "Idioma"
 }
