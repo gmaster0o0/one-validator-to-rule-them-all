@@ -120,3 +120,51 @@ npx nx lint <project-name>
 - Use `pnpm` throughout the workspace.
 - Shared libraries are located under `shared/` instead of a traditional `libs/` folder.
 - Frontend validation is schema-first and shares the same contract with the backend.
+
+## Usage in templates
+
+The `zodTransformAll` pipe transforms Zod errors into an array of tokens that can be used for translation. Each token has a `key` for the translation key and `params` for any dynamic values needed in the translation.
+
+### More coding friendly but less extractor friendly. 
+
+**extractor cannot understand the dynamic keys and params so it cannot extract the translation keys.**
+
+```html
+@if (loginForm.password().errors() | zodTransformAll:'login'; astokens) { 
+  @for (token of tokens; track $index) {
+    <hlm-field-error>
+      {{ token.key | transloco:token.params }}
+    </hlm-field-error>
+  } 
+}
+```
+
+### This solution is more editing in the template but more extractor friendly
+
+```html
+@if (loginForm.password().errors() | zodTransformAll:'login'; as tokens) {
+  <hlm-field-error validator="too_small">
+    {{ 'login.password.too_small' | transloco: { minimum: 5 } }}
+  </hlm-field-error>
+
+  <hlm-field-error validator="need_number">
+    {{ 'login.password.need_number' | transloco }}
+  </hlm-field-error>
+
+  <hlm-field-error validator="need_letter">
+    {{ 'login.password.need_letter' | transloco }}
+  </hlm-field-error>
+}
+```
+
+### Show only the 1st error:
+
+**this is partialy extract 1 key, but if there are more than 1 error, the extractor cannot understand the dynamic keys and params so it cannot extract the translation keys.**
+
+```html
+@if (loginForm.password().errors() | zodTransformFirst:'login'; as token) {
+  <hlm-field-error>
+    {{ token.key | transloco }}
+  </hlm-field-error>
+}
+```
