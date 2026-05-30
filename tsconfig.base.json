@@ -70,6 +70,9 @@
       ],
       "@spartan-ng/helm/select": [
         "./shared/spartan-ng/select/src/index.ts"
+      ],
+      "@spartan-ng/helm/typography": [
+        "./shared/spartan-ng/typography/src/index.ts"
       ]
     }
   },
