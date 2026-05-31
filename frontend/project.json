@@ -52,6 +52,7 @@
         "buildTarget": "frontend:build:development",
         "proxyConfig": "frontend/proxy.conf.json"
       },
+      "dependsOn": ["backend:serve"],
       "configurations": {
         "production": {
           "buildTarget": "frontend:build:production"

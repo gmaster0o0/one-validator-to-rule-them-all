@@ -6,9 +6,6 @@
   "login.autofill.invalidEmail": "Correo electrónico inválido",
   "login.label.email": "Correo electrónico",
   "login.label.password": "Contraseña",
-  "login.password.too_small": "La contraseña debe tener al menos {{minimum}} caracteres",
-  "login.password.need_number": "La contraseña debe contener al menos un número",
-  "login.password.need_letter": "La contraseña debe contener al menos una letra",
   "login.error.title": "Error de autenticación",
   "login.error.message": "La autenticación ha fallado.",
   "language.select": "Selecciona idioma",
@@ -16,6 +13,10 @@
   "backend.waiting": "Esperando respuesta...",
   "form.errors": "ERRORES DE VALIDACIÓN",
   "form.noErrors": "No hay errores de validación 🎉",
+  "login.password.too_small": "Missing value for 'login.password.too_small'",
+  "login.password.need_number": "Missing value for 'login.password.need_number'",
+  "login.password.need_letter": "Missing value for 'login.password.need_letter'",
+  "login.email.invalid": "Missing value for 'login.email.invalid'",
   "login.email.invalid_format": "El correo electrónico debe ser una dirección de correo electrónico válida",
   "language.label": "Idioma"
 }

@@ -6,9 +6,6 @@
   "login.autofill.invalidEmail": "Érvénytelen e-mail cím",
   "login.label.email": "E-mail",
   "login.label.password": "Jelszó",
-  "login.password.too_small": "A jelszónak legalább {{minimum}} karakter hosszúnak kell lennie",
-  "login.password.need_number": "A jelszónak legalább egy számot kell tartalmaznia",
-  "login.password.need_letter": "A jelszónak legalább egy betűt kell tartalmaznia",
   "login.error.title": "Hitelesítés sikertelen",
   "login.error.message": "A hitelesítés sikertelen.",
   "language.select": "Válasszon nyelvet",
@@ -16,6 +13,10 @@
   "backend.waiting": "Válaszra vár...",
   "form.errors": "ÉRVÉNYESÍTÉSI HIBÁK",
   "form.noErrors": "Nincs érvényesítési hiba 🎉",
+  "login.password.too_small": "Missing value for 'login.password.too_small'",
+  "login.password.need_number": "Missing value for 'login.password.need_number'",
+  "login.password.need_letter": "Missing value for 'login.password.need_letter'",
+  "login.email.invalid": "Missing value for 'login.email.invalid'",
   "login.email.invalid_format": "Az email címnek érvényes email címnek kell lennie",
   "language.label": "Nyelv"
 }

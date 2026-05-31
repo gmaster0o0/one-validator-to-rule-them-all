@@ -1,5 +1,6 @@
+<h1 [class]="'text-center ' + h1Class">One Validator to Rule Them All</h1>
 <div
-  class="preview flex min-h-[350px] flex-col w-full justify-center px-4 lg:px-10 py-10 items-center style-vega"
+  class="preview flex flex-row gap-4 w-full justify-center px-4 lg:px-10 py-10 items-start style-vega"
 >
   <section class="w-full max-w-sm" hlmCard>
     <div hlmCardHeader>
@@ -75,19 +76,11 @@
               hlmInput
             />
             @if (loginForm.password().errors() | zodTransformAll:'login'; as
-            tokens) {
-            <hlm-field-error validator="too_small">
-              {{ 'login.password.too_small' | transloco: { minimum: 5 } }}
+            tokens) { @for (token of tokens; track $index) {
+            <hlm-field-error>
+              {{ token.key | transloco:token.params }}
             </hlm-field-error>
-
-            <hlm-field-error validator="need_number">
-              {{ 'login.password.need_number' | transloco }}
-            </hlm-field-error>
-
-            <hlm-field-error validator="need_letter">
-              {{ 'login.password.need_letter' | transloco }}
-            </hlm-field-error>
-            }
+            } }
           </div>
         </div>
       </form>

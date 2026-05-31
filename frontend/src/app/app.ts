@@ -33,6 +33,8 @@ import {
 } from '@one-validator-to-rule-them-all/validation';
 import { LanguageSelector } from './languange/language-selector';
 import { TranslocoModule } from '@jsverse/transloco';
+import { hlmH1 } from '@spartan-ng/helm/typography';
+import { marker } from '@jsverse/transloco-keys-manager/marker';
 
 @Component({
   selector: 'app-root',
@@ -63,6 +65,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 })
 export class AppComponent {
   private appService = inject(AppService);
+  protected readonly h1Class = hlmH1;
   loginStatus = this.appService.loginResource;
   backendResponse = computed(() => {
     if (this.loginStatus.status() === 'error') {
@@ -103,6 +106,12 @@ export class AppComponent {
     this.loginData.set(invalidLoginCredentialsBadEmail);
     this.loginForm().markAsDirty();
   }
+  // Never runs but needed for the marker to pick up the translation keys
+  _ = [
+    marker('login.password.too_small'),
+    marker('login.password.need_number'),
+    marker('login.password.need_letter'),
+  ];
 
   /**
    * Signal based form that validates against the

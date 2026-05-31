@@ -130,7 +130,7 @@ The `zodTransformAll` pipe transforms Zod errors into an array of tokens that ca
 **extractor cannot understand the dynamic keys and params so it cannot extract the translation keys.**
 
 ```html
-@if (loginForm.password().errors() | zodTransformAll:'login'; astokens) { 
+@if (loginForm.password().errors() | zodTransformAll:'login'; as tokens) { 
   @for (token of tokens; track $index) {
     <hlm-field-error>
       {{ token.key | transloco:token.params }}
@@ -139,7 +139,19 @@ The `zodTransformAll` pipe transforms Zod errors into an array of tokens that ca
 }
 ```
 
-### This solution is more editing in the template but more extractor friendly
+*You can add the missing keys to the language files manually or you can use the `marker` function in the ts.*
+*This is still manual work but at least you don't need to worry about the dynamic keys and params in the templates, you can just add the keys in the ts and the extractor will pick them up.*
+```ts
+  _ = [
+    marker('login.password.too_small'),
+    marker('login.password.need_number'),
+    marker('login.password.need_letter'),
+  ];
+```
+### ❌ This solution is not working because it will shows all the error if any of the validator fails.
+
+*It can work with a custom directive that shows the error only if the validator is failed, but it is not implemented yet.*
+
 
 ```html
 @if (loginForm.password().errors() | zodTransformAll:'login'; as tokens) {
@@ -157,7 +169,7 @@ The `zodTransformAll` pipe transforms Zod errors into an array of tokens that ca
 }
 ```
 
-### Show only the 1st error:
+### ✅ Show only the 1st error:
 
 **this is partialy extract 1 key, but if there are more than 1 error, the extractor cannot understand the dynamic keys and params so it cannot extract the translation keys.**
 
