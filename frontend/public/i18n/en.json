@@ -13,10 +13,10 @@
   "backend.waiting": "Waiting for response...",
   "form.errors": "VALIDATION ERRORS",
   "form.noErrors": "No validation errors 🎉",
-  "login.password.too_small": "Missing value for 'login.password.too_small'",
-  "login.password.need_number": "Missing value for 'login.password.need_number'",
-  "login.password.need_letter": "Missing value for 'login.password.need_letter'",
-  "login.email.invalid": "Missing value for 'login.email.invalid'",
+  "login.password.too_small": "Password is too short",
+  "login.password.need_number": "Password must contain at least one number",
+  "login.password.need_letter": "Password must contain at least one letter",
+  "login.email.invalid": "Email is invalid",
   "login.email.invalid_format": "Email must be a valid email address",
   "language.label": "Language"
 }

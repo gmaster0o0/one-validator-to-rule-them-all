@@ -13,10 +13,10 @@
   "backend.waiting": "Válaszra vár...",
   "form.errors": "ÉRVÉNYESÍTÉSI HIBÁK",
   "form.noErrors": "Nincs érvényesítési hiba 🎉",
-  "login.password.too_small": "Missing value for 'login.password.too_small'",
-  "login.password.need_number": "Missing value for 'login.password.need_number'",
-  "login.password.need_letter": "Missing value for 'login.password.need_letter'",
-  "login.email.invalid": "Missing value for 'login.email.invalid'",
+  "login.password.too_small": "A jelszó túl rövid",
+  "login.password.need_number": "A jelszónak legalább egy számot kell tartalmaznia",
+  "login.password.need_letter": "A jelszónak legalább egy betűt kell tartalmaznia",
+  "login.email.invalid": "Az e-mail cím érvénytelen",
   "login.email.invalid_format": "Az email címnek érvényes email címnek kell lennie",
   "language.label": "Nyelv"
 }
