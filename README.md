@@ -41,12 +41,12 @@ The repository is organized into apps and shared libraries under a monorepo stru
 
 ## Status
 
-- **backend**: Login flow, Zod decorators, Zod pipes — DONE
-- **frontend**: Signal form with Zod schema validation — DONE
-- **shared/schemas**: DONE
-- **shared/testing**: In Progress, adding content as needed for tests
-- **shared/validation**: `ErrorTransformer` —DONE
-- **spartan-ng**: DONE
+- **backend**: Login flow, Zod decorators, Zod pipes — ✅
+- **frontend**: Signal form with Zod schema validation — ✅
+- **shared/schemas**: ✅
+- **shared/testing**: ✅
+- **shared/validation**: `ErrorTransformer` — ✅
+- **spartan-ng**: ✅
 
 ## Setup
 
@@ -180,3 +180,7 @@ The `zodTransformAll` pipe transforms Zod errors into an array of tokens that ca
   </hlm-field-error>
 }
 ```
+
+### Demo app preview:
+
+<img width="974" height="870" alt="image" src="https://github.com/user-attachments/assets/90839731-85b8-438e-b2a7-8a886e65a565" />
