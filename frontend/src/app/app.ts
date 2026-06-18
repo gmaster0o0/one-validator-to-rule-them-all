@@ -66,29 +66,23 @@ import { marker } from '@jsverse/transloco-keys-manager/marker';
 export class AppComponent {
   private appService = inject(AppService);
   protected readonly h1Class = hlmH1;
-  loginStatus = this.appService.loginResource;
-  backendResponse = computed(() => {
-    if (this.loginStatus.status() === 'error') {
-      return (
-        (this.loginStatus.error() as any)?.error ?? this.loginStatus.error()
-      );
-    }
-    return this.loginStatus.value();
-  });
+
+  loginStatus = this.appService.status;
+  // Derives the value shown in the debug panel and the error alert from plain signals —
+  // no constructor effect needed.
+  backendResponse = computed(() =>
+    this.appService.status() === 'error'
+      ? this.appService.error()
+      : this.appService.value(),
+  );
+
+  errorResponse = computed(() =>
+    this.appService.status() === 'error' ? this.appService.error() : null,
+  );
 
   // Login form state management using Angular's reactive forms with signals
   loginData = signal({ email: '', password: '' });
-  backendData = signal<any>(null);
 
-  constructor() {
-    effect(() => {
-      this.loginData();
-
-      // Whenever loginData changes, we reset the backend response to clear previous results
-      //this clears the backend alert
-      this.appService.reset();
-    });
-  }
   /**
    * Helper methods to fill the form with different test credentials for quick testing of various scenarios.
    */
