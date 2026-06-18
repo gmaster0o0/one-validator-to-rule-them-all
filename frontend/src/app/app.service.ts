@@ -1,45 +1,42 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { httpResource } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { LoginCredentialsDto } from '@one-validator-to-rule-them-all/schema';
+import {
+  BaseUserDto,
+  LoginCredentialsDto,
+} from '@one-validator-to-rule-them-all/schema';
+import { catchError, of, tap } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+export type LoginStatus = 'idle' | 'loading' | 'success' | 'error';
+
+export interface BackendError {
+  message: string;
+  statusCode: number;
+}
+
+@Injectable({ providedIn: 'root' })
 export class AppService {
   private readonly http = inject(HttpClient);
 
-  // This signal will hold the login credentials and trigger the httpResource when set
-  private readonly loginTrigger = signal<LoginCredentialsDto | null>(null);
+  readonly status = signal<LoginStatus>('idle');
+  readonly value = signal<BaseUserDto | null>(null);
+  readonly error = signal<BackendError | null>(null);
 
-  // Modern Resource API for managing the login state
-  loginResource = httpResource(() => {
-    const credentials = this.loginTrigger();
-    console.log('Resource triggered with data:', credentials); // Debug log
-    // If no data, do not initiate a request (undefined)
-    if (!credentials) return undefined;
-
-    // POST request configuration
-    return {
-      url: '/api/login',
-      method: 'POST',
-      body: credentials,
-    };
-  });
-
-  /**
-   * Login method that sets the loginTrigger signal, which in turn triggers the httpResource to make the POST request.
-   * @param data The login credentials
-   */
   login(data: LoginCredentialsDto): void {
-    console.log('Logging in with credentials:', data);
-    this.loginTrigger.set(data);
-  }
+    this.status.set('loading');
 
-  /**
-   * Reset the login state
-   */
-  reset(): void {
-    this.loginTrigger.set(null);
+    this.http
+      .post<BaseUserDto>('/api/login', data)
+      .pipe(
+        tap((response) => {
+          this.value.set(response);
+          this.status.set('success');
+        }),
+        catchError((err) => {
+          this.error.set(err?.error ?? err);
+          this.status.set('error');
+          return of(null);
+        }),
+      )
+      .subscribe();
   }
 }

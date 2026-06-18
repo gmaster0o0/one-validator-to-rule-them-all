@@ -94,15 +94,14 @@
         [disabled]="loginForm().pending() || loginForm().invalid()"
         class="w-full"
       >
-        {{ loginStatus.status() === 'loading' ? 'Login...' : 'Login' }}
+        {{ loginStatus() === 'loading' ? 'Login...' : 'Login' }}
       </button>
-      @if (loginStatus.status() === 'error') {
+      @if (loginStatus() === 'error') {
       <hlm-alert variant="destructive" class="max-w-md">
         <ng-icon name="lucideAlertCircle" />
         <h4 hlmAlertTitle>{{ 'login.error.title' | transloco }}</h4>
         <p hlmAlertDescription>
-          {{ backendResponse()?.message || ('login.error.message' | transloco)
-          }}
+          {{ errorResponse()?.message || ('login.error.message' | transloco) }}
         </p>
       </hlm-alert>
       }
@@ -113,6 +112,6 @@
     [data]="loginData()"
     [form]="loginForm()"
     [backendResponse]="backendResponse()"
-    [backendStatus]="loginStatus.status()"
+    [backendStatus]="loginStatus()"
   ></app-debug-panel>
 </div>
