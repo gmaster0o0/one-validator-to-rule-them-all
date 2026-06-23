@@ -100,13 +100,6 @@ export class AppComponent {
     this.loginData.set(invalidLoginCredentialsBadEmail);
     this.loginForm().markAsDirty();
   }
-  // Never runs but needed for the marker to pick up the translation keys
-  _ = [
-    marker('login.password.too_small'),
-    marker('login.password.need_number'),
-    marker('login.password.need_letter'),
-  ];
-
   /**
    * Signal based form that validates against the
    * LoginCredentialsSchema and triggers the login process on submission.

@@ -59,8 +59,8 @@
               [formField]="loginForm.email"
               hlmInput
             />
-            @if (loginForm.email().errors() | zodTransform1:'login'; as token) {
-            <hlm-field-error> {{ token.key | transloco }} </hlm-field-error>
+            @for (error of loginForm.email().errors(); track error) {
+            <hlm-field-error> {{ error.message }} </hlm-field-error>
             }
           </div>
           <div class="grid gap-2">
@@ -75,12 +75,9 @@
               id="password"
               hlmInput
             />
-            @if (loginForm.password().errors() | zodTransformAll:'login'; as
-            tokens) { @for (token of tokens; track $index) {
-            <hlm-field-error>
-              {{ token.key | transloco:token.params }}
-            </hlm-field-error>
-            } }
+            @for (error of loginForm.password().errors(); track error) {
+            <hlm-field-error> {{ error.message }} </hlm-field-error>
+            }
           </div>
         </div>
       </form>
@@ -100,9 +97,7 @@
       <hlm-alert variant="destructive" class="max-w-md">
         <ng-icon name="lucideAlertCircle" />
         <h4 hlmAlertTitle>{{ 'login.error.title' | transloco }}</h4>
-        <p hlmAlertDescription>
-          {{ errorResponse()?.message || ('login.error.message' | transloco) }}
-        </p>
+        <p hlmAlertDescription>{{ errorResponse()?.message }}</p>
       </hlm-alert>
       }
     </div>
