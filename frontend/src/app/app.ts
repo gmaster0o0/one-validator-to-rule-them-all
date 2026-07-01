@@ -32,9 +32,8 @@ import {
   ZodTransformPipFirst,
 } from '@one-validator-to-rule-them-all/validation';
 import { LanguageSelector } from './languange/language-selector';
-import { TranslocoModule } from '@jsverse/transloco';
+
 import { hlmH1 } from '@spartan-ng/helm/typography';
-import { marker } from '@jsverse/transloco-keys-manager/marker';
 
 @Component({
   selector: 'app-root',
@@ -53,7 +52,6 @@ import { marker } from '@jsverse/transloco-keys-manager/marker';
     DebugPanelComponent,
     HlmIconImports,
     HlmAlertImports,
-    TranslocoModule,
   ],
   providers: [
     provideIcons({ lucideCheck, lucideX, lucideMailX, lucideAlertCircle }),

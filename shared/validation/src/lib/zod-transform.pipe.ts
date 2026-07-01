@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { transformZodIssue, transformZodIssues } from './error-transformer'; // A meglévő if-mentes fügvényed
+import { transformZodIssue, transformZodIssues } from './error-transformer';
 
 @Pipe({
   name: 'zodTransform1',
