@@ -24,6 +24,7 @@ export class LanguageSelector {
   protected readonly languageOptions: readonly LangOption[] = [
     { value: 'en', label: 'English/EN' },
     { value: 'hu', label: 'Magyar/HU' },
+    { value: 'pl', label: 'Polski/PL' },
     { value: 'es', label: 'Español/ES' },
   ] as const;
 

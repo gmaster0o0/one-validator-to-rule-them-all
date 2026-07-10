@@ -12,7 +12,7 @@ import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import {
   form,
   FormRoot,

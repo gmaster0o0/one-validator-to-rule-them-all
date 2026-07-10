@@ -1,0 +1,22 @@
+{
+  "login.title": "Zaloguj się do swojego konta",
+  "login.autofill": "Autouzupełnianie",
+  "login.autofill.validCredential": "Prawidłowe dane",
+  "login.autofill.invalidCredential": "Błędne dane",
+  "login.autofill.invalidEmail": "Błędny adres e-mail",
+  "login.label.email": "Adres e-mail",
+  "login.label.password": "Hasło",
+  "login.error.title": "Błąd uwierzytelniania",
+  "login.error.message": "Uwierzytelnianie nie powiodło się.",
+  "language.select": "Wybierz język",
+  "backend.response": "ODPOWIEDŹ Z BACKENDU",
+  "backend.waiting": "Oczekiwanie na odpowiedź...",
+  "form.errors": "BŁĘDY WALIDACJI",
+  "form.noErrors": "Brak błędów walidacji 🎉",
+  "login.password.too_small": "Hasło jest za krótkie",
+  "login.password.need_number": "Hasło musi zawierać co najmniej jedną cyfrę",
+  "login.password.need_letter": "Hasło musi zawierać co najmniej jedną literę",
+  "login.email.invalid": "Niepoprawny adres e-mail",
+  "login.email.invalid_format": "Adres e-mail musi być prawidłowym adresem",
+  "language.label": "Język"
+}
