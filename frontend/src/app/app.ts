@@ -27,11 +27,6 @@ import {
 } from '@one-validator-to-rule-them-all/testing';
 import { DebugPanelComponent } from './debug/debug-panel';
 import { AppService } from './app.service';
-import {
-  ZodTransformPipeAll,
-  ZodTransformPipFirst,
-} from '@one-validator-to-rule-them-all/validation';
-import { LanguageSelector } from './languange/language-selector';
 
 import { hlmH1 } from '@spartan-ng/helm/typography';
 
@@ -39,14 +34,11 @@ import { hlmH1 } from '@spartan-ng/helm/typography';
   selector: 'app-root',
   standalone: true,
   imports: [
-    LanguageSelector,
     HlmCardImports,
     HlmLabelImports,
     HlmInputImports,
     HlmButtonImports,
     HlmFieldImports,
-    ZodTransformPipFirst,
-    ZodTransformPipeAll,
     FormField,
     FormRoot,
     DebugPanelComponent,

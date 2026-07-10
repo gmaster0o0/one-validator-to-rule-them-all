@@ -6,6 +6,7 @@
     "prepare": "husky",
     "test": "npx nx run-many --target=test --all",
     "lint": "npx nx run-many --target=lint --all",
+    "e2e": "npx nx run-many --target=e2e --all",
     "typecheck": "npx nx run-many --target=typecheck --all",
     "i18n:extract": "transloco-keys-manager extract",
     "i18n:find": "transloco-keys-manager find"
