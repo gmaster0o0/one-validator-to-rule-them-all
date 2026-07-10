@@ -59,7 +59,8 @@
               [formField]="loginForm.email"
               hlmInput
             />
-            @if (loginForm.email().errors() | zodTransform1:'login'; as token) {
+            @if (loginForm.email().errors() | zodTransformFirst:'login'; as
+            token) {
             <hlm-field-error> {{ token.key | transloco }} </hlm-field-error>
             }
           </div>

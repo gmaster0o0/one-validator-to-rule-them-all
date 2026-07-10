@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { transformZodIssue, transformZodIssues } from './error-transformer'; // A meglévő if-mentes fügvényed
 
 @Pipe({
-  name: 'zodTransform1',
+  name: 'zodTransformFirst',
   standalone: true,
 })
 /**
