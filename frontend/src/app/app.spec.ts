@@ -5,7 +5,7 @@ import { getTranslocoModule } from './languange/transloco-testing.module';
 import { AppService } from './app.service';
 import { LoginFormHarness } from './app.harness';
 import { signal } from '@angular/core';
-import { vi } from 'vitest';
+import { vi, type Mock } from 'vitest';
 import {
   createMockedAppService,
   invalidLoginCredentials,
@@ -15,10 +15,10 @@ import {
 describe('AppComponent', () => {
   let angularSignals: {
     status: ReturnType<typeof signal<'idle' | 'loading' | 'error' | 'success'>>;
-    value: ReturnType<typeof signal<any>>;
-    error: ReturnType<typeof signal<any>>;
+    value: ReturnType<typeof signal<unknown>>;
+    error: ReturnType<typeof signal<unknown>>;
   };
-  let mockAppService: any;
+  let mockAppService: typeof angularSignals & { login: Mock };
 
   beforeEach(async () => {
     const agnosticMock = createMockedAppService();

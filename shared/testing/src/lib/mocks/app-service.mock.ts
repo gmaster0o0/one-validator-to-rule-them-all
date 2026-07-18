@@ -5,9 +5,9 @@
  */
 export interface MockedAppService {
   status: 'idle' | 'loading' | 'error' | 'success';
-  value: any;
-  error: any;
-  login: (data: any) => void;
+  value: unknown;
+  error: unknown;
+  login: (data: unknown) => void;
 }
 
 export function createMockedAppService(): MockedAppService {

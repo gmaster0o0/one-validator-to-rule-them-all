@@ -1,7 +1,54 @@
+import { z } from 'zod';
+
 export interface TranslocoToken {
   key: string; // ex. "login.email.invalid_format"
-  params: Record<string, any>; // ex. { format: "email", pattern: "..." }
+  params: Record<string, unknown>; // ex. { format: "email", pattern: "..." }
 }
+
+/**
+ * The Standard Schema spec (implemented by Angular Signal Forms
+ * `validateStandardSchema` and by Zod itself) allows path elements to be
+ * either plain PropertyKeys or an object with { key: PropertyKey }.
+ * In practice Zod always returns a plain PropertyKey, but the type must
+ * follow the specification.
+ */
+const PathSegmentSchema = z.union([
+  z.string(),
+  z.number(),
+  z.symbol(),
+  z.looseObject({ key: z.union([z.string(), z.number(), z.symbol()]) }),
+]);
+
+function normalizePathSegment(
+  segment: z.infer<typeof PathSegmentSchema>,
+): PropertyKey {
+  return typeof segment === 'object' ? segment.key : segment;
+}
+
+/**
+ * A "loose" issue shape for non-Zod-origin errors (for example, a backend
+ * response or a native Signal Forms validator error that has no `.issue`).
+ * We actually validate this too, not just trust the type — if someone tries
+ * to run an object through it that does not even resemble an issue, `.parse()`
+ * will throw an error instead of silently passing.
+ */
+export const LooseIssueSchema = z.looseObject({
+  code: z.string().optional(),
+  errorCode: z.string().optional(),
+  path: z.array(PathSegmentSchema).optional(),
+  message: z.string().optional(),
+});
+export type LooseIssue = z.infer<typeof LooseIssueSchema>;
+
+/**
+ * The minimal guaranteed contract for real Zod issues is defined by Zod's own
+ * $ZodIssueBase interface (code optional, path/message required), plus our
+ * own errorCode field — OR a loose, validated non-Zod error.
+ */
+export type IssueLike =
+  | (z.core.$ZodIssueBase & { errorCode?: string })
+  | LooseIssue;
+
 /**
  * Converts a single Zod issue into a TranslocoToken that can be used for i18n error messages.
  * @param issue Zod issue
@@ -11,25 +58,34 @@ export interface TranslocoToken {
  * and relevant parameters for translation.
  */
 export function transformZodIssue(
-  issue: any,
+  issue: IssueLike,
   formNamespace: string,
 ): TranslocoToken {
-  const pathKey = issue.path?.join('.') || 'global';
-  const finalErrorCode = issue.errorCode || issue.code || 'unknown_error';
+  const path = issue.path ?? [];
+  const pathKey =
+    path.length > 0 ? path.map(normalizePathSegment).join('.') : 'global';
+  const finalErrorCode = issue.errorCode ?? issue.code ?? 'unknown_error';
 
   const key = `${formNamespace}.${pathKey}.${finalErrorCode}`;
 
   // Filter out the standard Zod issue properties and keep only the relevant ones for
   // translation parameters
-  const ignoredKeys = ['code', 'path', 'message', 'origin', 'errorCode'];
-  const restParams = Object.keys(issue).reduce(
-    (acc, currentKey) => {
-      if (!ignoredKeys.includes(currentKey)) {
-        acc[currentKey] = (issue as any)[currentKey];
+  const ignoredKeys = new Set<string>([
+    'code',
+    'path',
+    'message',
+    'origin',
+    'errorCode',
+  ]);
+
+  const restParams = Object.entries(issue).reduce<Record<string, unknown>>(
+    (acc, [currentKey, value]) => {
+      if (!ignoredKeys.has(currentKey)) {
+        acc[currentKey] = value;
       }
       return acc;
     },
-    {} as Record<string, any>,
+    {},
   );
 
   return {
@@ -47,13 +103,10 @@ export function transformZodIssue(
  * structured key and relevant parameters for translation.
  */
 export function transformZodIssues(
-  issues: any[],
+  issues: IssueLike[],
   formNamespace: string,
 ): TranslocoToken[] {
   if (!issues || !Array.isArray(issues)) return [];
 
-  return issues.map((err) => {
-    const actualIssue = err.issue || err;
-    return transformZodIssue(actualIssue, formNamespace);
-  });
+  return issues.map((issue) => transformZodIssue(issue, formNamespace));
 }

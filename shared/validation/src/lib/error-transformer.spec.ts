@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { transformZodIssue, transformZodIssues } from './error-transformer';
+import {
+  transformZodIssue,
+  transformZodIssues,
+  type IssueLike,
+} from './error-transformer';
 import {
   buildZodIssue,
   zodIssueInvalidEmail,
@@ -32,7 +36,7 @@ describe('transformZodIssue', () => {
   it('should use a global key when no path is provided', () => {
     const issue = buildZodIssue({ path: undefined, code: 'custom_error' });
 
-    const result = transformZodIssue(issue as any, 'register');
+    const result = transformZodIssue(issue as IssueLike, 'register');
 
     expect(result.key).toBe('register.global.custom_error');
   });
@@ -65,8 +69,14 @@ describe('transformZodIssues', () => {
   });
 
   it('should return an empty array when the input is not a valid issue list', () => {
-    expect(transformZodIssues(null as any, 'login')).toEqual([]);
-    expect(transformZodIssues(undefined as any, 'login')).toEqual([]);
-    expect(transformZodIssues('not-an-array' as any, 'login')).toEqual([]);
+    expect(transformZodIssues(null as unknown as IssueLike[], 'login')).toEqual(
+      [],
+    );
+    expect(
+      transformZodIssues(undefined as unknown as IssueLike[], 'login'),
+    ).toEqual([]);
+    expect(
+      transformZodIssues('not-an-array' as unknown as IssueLike[], 'login'),
+    ).toEqual([]);
   });
 });

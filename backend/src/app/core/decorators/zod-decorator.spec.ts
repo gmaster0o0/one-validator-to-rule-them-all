@@ -1,6 +1,6 @@
 jest.mock('@nestjs/common', () => ({
-  Body: jest.fn((pipe: unknown) => 'bodyDecorator'),
-  Param: jest.fn((pipe: unknown) => 'paramDecorator'),
+  Body: jest.fn(() => 'bodyDecorator'),
+  Param: jest.fn(() => 'paramDecorator'),
 }));
 
 jest.mock('../pipes', () => ({
@@ -31,7 +31,7 @@ describe('Zod decorators', () => {
     expect(Body).toHaveBeenCalledTimes(1);
     const calledArg = (Body as unknown as jest.Mock).mock.calls[0][0];
     expect(calledArg).toBeInstanceOf(ZodValidationPipe);
-    expect((calledArg as any).schema).toBe(schema);
+    expect((calledArg as { schema: unknown }).schema).toBe(schema);
     expect(result).toBe('bodyDecorator');
   });
 
@@ -44,7 +44,7 @@ describe('Zod decorators', () => {
     const calledArg = (Param as unknown as jest.Mock).mock.calls[0][1];
     expect(calledName).toBe('id');
     expect(calledArg).toBeInstanceOf(ZodValidationPipe);
-    expect((calledArg as any).schema).toBe(schema);
+    expect((calledArg as { schema: unknown }).schema).toBe(schema);
     expect(result).toBe('paramDecorator');
   });
 });

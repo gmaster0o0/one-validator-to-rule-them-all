@@ -29,7 +29,7 @@ import { DebugPanelComponent } from './debug/debug-panel';
 import { AppService } from './app.service';
 import {
   ZodTransformPipeAll,
-  ZodTransformPipFirst,
+  ZodTransformPipeFirst,
 } from '@one-validator-to-rule-them-all/validation';
 import { LanguageSelector } from './languange/language-selector';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -46,7 +46,7 @@ import { marker } from '@jsverse/transloco-keys-manager/marker';
     HlmInputImports,
     HlmButtonImports,
     HlmFieldImports,
-    ZodTransformPipFirst,
+    ZodTransformPipeFirst,
     ZodTransformPipeAll,
     FormField,
     FormRoot,

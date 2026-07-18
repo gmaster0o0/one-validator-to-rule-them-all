@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import {
   invalidLoginCredentials,
   invalidLoginCredentialsMissingEmail,
@@ -18,9 +18,10 @@ describe('POST /api/login', () => {
     try {
       await axios.post('/api/login', invalidLoginCredentialsMissingEmail);
       throw new Error('Expected request to fail with 400');
-    } catch (error: any) {
-      expect(error.response?.status).toBe(400);
-      expect(error.response?.data).toMatchObject({
+    } catch (error) {
+      const { response } = error as AxiosError;
+      expect(response?.status).toBe(400);
+      expect(response?.data).toMatchObject({
         statusCode: 400,
         error: 'Bad Request',
       });
@@ -31,9 +32,10 @@ describe('POST /api/login', () => {
     try {
       await axios.post('/api/login', invalidLoginCredentials);
       throw new Error('Expected request to fail with 401');
-    } catch (error: any) {
-      expect(error.response?.status).toBe(401);
-      expect(error.response?.data).toMatchObject({
+    } catch (error) {
+      const { response } = error as AxiosError;
+      expect(response?.status).toBe(401);
+      expect(response?.data).toMatchObject({
         statusCode: 401,
         error: 'Unauthorized',
       });

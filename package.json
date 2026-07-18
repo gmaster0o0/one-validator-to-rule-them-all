@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky",
+    "start:dev": "nx run frontend:serve:development --no-tui",
     "test": "npx nx run-many --target=test --all",
     "lint": "npx nx run-many --target=lint --all",
     "typecheck": "npx nx run-many --target=typecheck --all",

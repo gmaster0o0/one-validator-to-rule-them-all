@@ -1,7 +1,7 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 
 export class LoginFormHarness extends ComponentHarness {
-  // A fő branchen lévő komponens kártyáját célozzuk meg
+  // Target the component card on the main branch
   static hostSelector = 'section[hlmCard]';
 
   protected getTitleElement = this.locatorFor('h3[hlmCardTitle]');
