@@ -12,33 +12,22 @@ export interface TranslocoToken {
  * In practice Zod always returns a plain PropertyKey, but the type must
  * follow the specification.
  */
-const PathSegmentSchema = z.union([
-  z.string(),
-  z.number(),
-  z.symbol(),
-  z.looseObject({ key: z.union([z.string(), z.number(), z.symbol()]) }),
-]);
+type PathSegment = PropertyKey | { key: PropertyKey };
 
-function normalizePathSegment(
-  segment: z.infer<typeof PathSegmentSchema>,
-): PropertyKey {
+function normalizePathSegment(segment: PathSegment): PropertyKey {
   return typeof segment === 'object' ? segment.key : segment;
 }
 
 /**
  * A "loose" issue shape for non-Zod-origin errors (for example, a backend
- * response or a native Signal Forms validator error that has no `.issue`).
- * We actually validate this too, not just trust the type — if someone tries
- * to run an object through it that does not even resemble an issue, `.parse()`
- * will throw an error instead of silently passing.
+ * error response that has no `.issue`).
  */
-export const LooseIssueSchema = z.looseObject({
-  code: z.string().optional(),
-  errorCode: z.string().optional(),
-  path: z.array(PathSegmentSchema).optional(),
-  message: z.string().optional(),
-});
-export type LooseIssue = z.infer<typeof LooseIssueSchema>;
+export interface LooseIssue {
+  code?: string;
+  errorCode?: string;
+  path?: PathSegment[];
+  message?: string;
+}
 
 /**
  * The minimal guaranteed contract for real Zod issues is defined by Zod's own
@@ -67,7 +56,6 @@ export function transformZodIssue(
   const finalErrorCode = issue.errorCode ?? issue.code ?? 'unknown_error';
 
   const key = `${formNamespace}.${pathKey}.${finalErrorCode}`;
-
   // Filter out the standard Zod issue properties and keep only the relevant ones for
   // translation parameters
   const ignoredKeys = new Set<string>([
@@ -88,10 +76,7 @@ export function transformZodIssue(
     {},
   );
 
-  return {
-    key,
-    params: restParams,
-  };
+  return { key, params: restParams };
 }
 
 /**
